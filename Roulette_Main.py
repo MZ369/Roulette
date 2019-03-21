@@ -80,6 +80,6 @@ while True:
             del_list.append(player.name)
     
     for player in del_list:
-        del player_dict[player.name]     
+        del player_dict[player]    
         
     print("\n______N_E_W___R_O_U_N_D______")
