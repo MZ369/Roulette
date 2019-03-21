@@ -41,6 +41,7 @@ while True:
             print("The game has stopped! The player ended with:")
             for player in player_dict.values():
                 print("\n" + player.name + ", " + str(player.capital) + "$")
+            print("\n")
             raise SystemExit()
     
     for player in player_dict.values():
