@@ -8,7 +8,7 @@ from Roulette_Lib import Player, Board, Pricepool
 
 def checksum(bet):
     if isinstance(bet, int):
-        if bet >= 0 and bet <= 37:
+        if bet >= 0 and bet <= 36:
             return True
         else:
             return False
@@ -49,12 +49,7 @@ while True:
             value = player.capital + 1
             bet = input(player.name + " make your bet! ").title()
             try:
-                if bet == '00':
-                    bet = 37
-                elif bet == '37':
-                    bet = 'Invalid'
-                else:
-                    bet = int(bet)
+                bet = int(bet)
             except ValueError:
                 pass
             if checksum(bet):
@@ -75,10 +70,15 @@ while True:
     
     pool1.price_calculate(player_dict, upshot)
     
+    del_list = []
+    
     for player in player_dict.values():
         print("\n" + player.name + " now have " + str(player.capital) + "$")
         if player.capital == 0:
             print(player.name + " have been remove from the table due to insufficient capital!")
-            del player_dict[player.name]
-            
+            del_list.append(player.name)
+    
+    for player in del_list:
+        del player_dict[player.name]     
+        
     print("\n______N_E_W___R_O_U_N_D______")

@@ -84,9 +84,8 @@ class Board:
                            33: [33, "Black", "Odd", "High", "Dozen 3", "Column 3"],
                            34: [34, "Red", "Even", "High", "Dozen 3", "Column 1"],
                            35: [35, "Black", "Odd", "High", "Dozen 3", "Column 2"],
-                           36: [36, "Red", "Even", "High", "Dozen 3", "Column 3"],
-                           37: [37]}
+                           36: [36, "Red", "Even", "High", "Dozen 3", "Column 3"]}
     
     def play(self):
-        roll = random.randint(0, 38)
+        roll = random.randint(0, 37)
         return (roll, self.bet_upshot[roll])
