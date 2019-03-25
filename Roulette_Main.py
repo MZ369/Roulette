@@ -5,7 +5,9 @@ Created on Fri Mar 15 09:33:16 2019
 @author: Mads Kragh-Berner
 """
 from Roulette_Lib import Player, Board, Pricepool 
-
+"""
+Funktioner/Variabler
+"""
 def checksum(bet):
     if isinstance(bet, int):
         if bet >= 0 and bet <= 36:
@@ -20,15 +22,19 @@ def checksum(bet):
         
 table1 = Board()
 pool1 = Pricepool()
-
 player_dict = {}
-
+"""
+Main Loop
+"""
 while True:
+    """
+    Player Section
+    """
     player_name = ' '
     while player_name != '':
         player_capital = 0
-        player_name = input("New Player? ").title()
-        if player_name != '' and player_name != 'Exit':
+        player_name = input("New Player? ").title() 
+        if player_name != '' and player_name != 'Leave' and player_name != 'Exit':
             while player_capital <= 0:
                 try: 
                     player_capital = int(input(player_name + "'s Capital? "))
@@ -36,14 +42,24 @@ while True:
                         print("Insufficient Capital!")
                 except ValueError:
                     print("Invalid Number!")
-            player_dict[player_name] = Player(player_name, player_capital)
+            player_dict[player_name] = Player(player_name, player_capital)  
+        elif player_name == 'Leave':
+            player_leave = input("Name of Leaving Player? ").title()
+            try:
+                if player_leave != '':
+                    print(player_leave + " leaves the table with " + str(player_dict[player_leave].capital) + "$")
+                    del player_dict[player_leave]
+            except KeyError:
+                print("...")   
         elif player_name == 'Exit':
             print("The game has stopped! The player ended with:")
             for player in player_dict.values():
                 print("\n" + player.name + ", " + str(player.capital) + "$")
             print("\n")
             raise SystemExit()
-    
+    """
+    Bet Section
+    """
     for player in player_dict.values():
         bet = ' '
         while bet != '':
@@ -64,7 +80,12 @@ while True:
                 player.make_bet(bet, value) 
             elif bet != '' and checksum(bet) == False:
                 print("Invalid Bet!")
-    
+            if player.capital == 0:
+                print("All In!")
+                break
+    """
+    Play/Elimination Section
+    """
     roll, upshot = table1.play()
     
     print("\nThe roulette rolled a " + str(roll) + "!")

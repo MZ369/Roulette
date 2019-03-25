@@ -87,5 +87,5 @@ class Board:
                            36: [36, "Red", "Even", "High", "Dozen 3", "Column 3"]}
     
     def play(self):
-        roll = random.randint(0, 37)
+        roll = random.randint(0, 36)
         return (roll, self.bet_upshot[roll])
