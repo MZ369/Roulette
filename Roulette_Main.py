@@ -33,8 +33,20 @@ while True:
     player_name = ' '
     while player_name != '':
         player_capital = 0
-        player_name = input("New Player? ").title() 
-        if player_name != '' and player_name != 'Leave' and player_name != 'Exit':
+        player_name = input("New Player? ").title()
+        if player_name in player_dict.keys():
+            print(player_name + ", your capital is " + str(player_dict[player_name].capital) + "$") 
+            while player_capital != '':
+                player_capital = input("Add more? ")
+                if player_capital == '':
+                    pass
+                else:
+                    try:
+                        player_capital = int(player_capital) + player_dict[player_name].capital
+                        player_dict[player_name] = Player(player_name, player_capital)
+                    except ValueError:
+                        print("Invalid Number!")
+        elif player_name != '' and player_name != 'Leave' and player_name != 'Exit':
             while player_capital <= 0:
                 try: 
                     player_capital = int(input(player_name + "'s Capital? "))
